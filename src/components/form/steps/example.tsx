@@ -15,6 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { CardModel } from "@/components/cards/card";
+import { Button } from "@/components/ui/button";
 
 function Example() {
   const [servicos, setServicos] = useState([]);
@@ -82,32 +84,20 @@ function Example() {
                       onChange={handleServiceChange}
                       className="hidden"
                     />
-                    <div
-                      className={`
-                        bg-zinc-800
-                        text-white 
-                        rounded-md 
-                        h-[20vh] 
-                        font-bold 
-                        flex 
-                        justify-center
-                        items-center
-                       
-                        ${
-                          selectedService === service.nome
-                            ? "border-2 border-blue-500"
-                            : "border-transparent"
-                        }
-                       '
-                      `}
-                    >
-                      {service.nome}
-                    </div>
+                    <CardModel
+                      service={service}
+                      selectedService={selectedService}
+                    />
                   </label>
                 </div>
               </div>
             ))}
-            <button type="submit">Enviar</button>
+
+            <div className="px-4">
+              <Button className="w-full bg-rose-500 font-bold">
+                Enviar
+              </Button>
+            </div>
           </>
         )}
       </form>
