@@ -1,50 +1,54 @@
 "use client";
+import { GettAllServicos } from "@/app/service/servicos";
 import useStore from "@/store/use-store";
-import { useEffect } from "react";
+import { useQuery } from "react-query";
+import { Button } from "../ui/button";
 
 const Step1 = () => {
   const nextStep = useStore((state) => state.nextStep);
-  const prevStep = useStore((state) => state.prevStep);
   const setFormData = useStore((state) => state.setFormData);
 
-  const handleRadioChange = (e) => {
+  const handleRadioChange = (e: any) => {
     setFormData({
       ...useStore.getState().formData,
       step1Data: e.target.value,
     });
   };
 
-  useEffect(() => {
-    // Alguma lógica para a etapa 2, se necessário
-  }, []);
+  const { data, isLoading } = useQuery<any[]>({
+    queryKey: ["servicos"],
+    queryFn: GettAllServicos,
+  });
+
+  if (isLoading || !data) return <div>Loading...</div>;
 
   return (
     <div>
       <h2>Step 1</h2>
 
-      <div>
-        <p>Choose an option:</p>
-        <label>
-          Option 1
-          <input
-            type="radio"
-            name="radioOption"
-            value="Option 1"
-            onChange={handleRadioChange}
-          />
-        </label>
-        <label>
-          Option 2
-          <input
-            type="radio"
-            name="radioOption"
-            value="Option 2"
-            onChange={handleRadioChange}
-          />
-        </label>
+      <div className="w-full flex p-4 gap-4">
+        {data?.map((item: any, index: any) => (
+          <div key={index}>
+            <label className="p-4">
+              <input
+                type="radio"
+                name="radioOption"
+                value={item.nome}
+                onChange={handleRadioChange}
+                className=""
+              />
+              <span>{item.nome}</span>
+            </label>
+          </div>
+        ))}
       </div>
-      <button onClick={prevStep}>Previous</button>
-      <button onClick={nextStep}>Next</button>
+
+      <Button
+        onClick={nextStep}
+        disabled={!useStore.getState().formData.step1Data}
+      >
+        Next
+      </Button>
     </div>
   );
 };

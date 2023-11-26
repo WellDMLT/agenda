@@ -8,7 +8,7 @@ const Step2 = () => {
   const prevStep = useStore((state) => state.prevStep);
   const setFormData = useStore((state) => state.setFormData);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     setFormData({ ...useStore.getState().formData, step2Data: e.target.value });
   };
 
@@ -19,6 +19,7 @@ const Step2 = () => {
   return (
     <div>
       <h2>Step 2</h2>
+
       <label>
         Data for Step 2:
         <input type="text" onChange={handleInputChange} />

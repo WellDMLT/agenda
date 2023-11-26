@@ -10,11 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model ProdutosEServicos {
-  id String @id @default(uuid())
-  nome String
-  valor Float
-  imagem String?
+  id        String  @id @default(uuid())
+  nome      String
+  valor     Float
+  imagem    String?
   descricao String
+}
+
+model Prestador {
+  id                String @id @default(uuid())
+  nome              String
+  horarioDisponivel String
+}
+
+model Horario {
+  id String @id @default(uuid())
+}
+
+model Pedido {
+  id String @id @default(uuid())
 }

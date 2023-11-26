@@ -21,12 +21,7 @@ function page() {
 
   const StepComponent = getStepComponent(currentStep);
 
-  return (
-    <div>
-      <h1>Multi-Step Form</h1>
-      {StepComponent && <StepComponent />}
-    </div>
-  );
+  return <div>{StepComponent && <StepComponent />}</div>;
 }
 
 export default page;
