@@ -19,13 +19,15 @@ model ProdutosEServicos {
 }
 
 model Prestador {
-  id                String @id @default(uuid())
+  id                String    @id @default(uuid())
   nome              String
-  horarioDisponivel String
+  horarioDisponivel Horario[]
 }
 
 model Horario {
-  id String @id @default(uuid())
+  id          String     @id @default(uuid())
+  prestadorId String?
+  prestador   Prestador? @relation(fields: [prestadorId], references: [id])
 }
 
 model Pedido {
