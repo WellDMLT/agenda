@@ -45,7 +45,7 @@ const Step1 = () => {
 
       <Button
         onClick={nextStep}
-        disabled={!useStore.getState().formData.step1Data}
+        // disabled={!useStore.getState().formData.step1Data}
       >
         Next
       </Button>
